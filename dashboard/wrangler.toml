@@ -1,0 +1,8 @@
+# UCC-1 MCA Leads Dashboard
+# Deploy to Cloudflare Pages: Drop this entire folder
+
+name = "ucc1-leads-dashboard"
+compatibility_date = "2025-07-16"
+
+# Single HTML file — no build step needed
+# Just deploy the dashboard/ folder to Cloudflare Pages

@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+*.db
+data/*.json
+data/*.csv
+data/*.png
+data/exports/
+.egg-info/
+*.egg-info
+.gstack/
+dashboard/data/*.json
+dashboard/data/*.csv

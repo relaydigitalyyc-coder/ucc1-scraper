@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCC-1 MCA Leads</title>
+<style>
+  :root {
+    --bg: #0a0e17; --card: #111827; --border: #1e293b;
+    --text: #e2e8f0; --muted: #94a3b8; --dim: #64748b;
+    --green: #22c55e; --yellow: #eab308; --orange: #f97316; --gray: #6b7280;
+    --accent: #3b82f6; --accent-bg: rgba(59,130,246,.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif; min-height: 100vh; }
+
+  /* Layout */
+  .app { max-width: 1440px; margin: 0 auto; padding: 24px; }
+  header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  header h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em; }
+  header .subtitle { font-size: .85rem; color: var(--muted); margin-top: 4px; }
+  header .updated { font-size: .75rem; color: var(--dim); text-align: right; }
+
+  /* Stat cards */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; backdrop-filter: blur(12px); }
+  .stat-card .label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+  .stat-card .value { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; }
+  .stat-card .value.green { color: var(--green); }
+  .stat-card .value.yellow { color: var(--yellow); }
+  .stat-card .value.blue { color: var(--accent); }
+
+  /* Filters */
+  .filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .filters input, .filters select { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; font-size: .82rem; outline: none; }
+  .filters input:focus, .filters select:focus { border-color: var(--accent); }
+  .filters input { flex: 1; min-width: 200px; }
+  .filters input::placeholder { color: var(--dim); }
+
+  /* Table */
+  .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  th { background: rgba(30,41,59,.6); padding: 10px 12px; text-align: left; font-weight: 600; color: var(--muted); font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; cursor: pointer; user-select: none; white-space: nowrap; }
+  th:hover { color: var(--text); }
+  th .sort { margin-left: 4px; font-size: .65rem; }
+  td { padding: 10px 12px; border-top: 1px solid var(--border); white-space: nowrap; }
+  tbody tr { cursor: pointer; transition: background .1s; }
+  tbody tr:hover { background: var(--accent-bg); }
+
+  /* Tier badge */
+  .tier-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: .7rem; font-weight: 700; text-transform: uppercase; }
+  .tier-A { background: rgba(34,197,94,.18); color: var(--green); }
+  .tier-B { background: rgba(234,179,8,.18); color: var(--yellow); }
+  .tier-C { background: rgba(249,115,22,.18); color: var(--orange); }
+  .tier-D { background: rgba(107,114,128,.18); color: var(--gray); }
+
+  /* Score bar */
+  .score-bar { width: 60px; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 6px; }
+  .score-bar .fill { height: 100%; border-radius: 3px; }
+  .score-bar .fill.high { background: var(--green); }
+  .score-bar .fill.mid { background: var(--yellow); }
+  .score-bar .fill.low { background: var(--orange); }
+
+  /* Stack badge */
+  .stack-badge { display: inline-block; padding: 1px 6px; border-radius: 8px; font-size: .7rem; font-weight: 700; }
+  .stack-badge.stacked { background: rgba(239,68,68,.18); color: #ef4444; }
+
+  /* Footer */
+  .table-footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(30,41,59,.4); border-top: 1px solid var(--border); font-size: .78rem; color: var(--muted); }
+  .table-footer button { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: .78rem; margin-left: 8px; }
+  .table-footer button:hover { border-color: var(--accent); color: var(--accent); }
+  .table-footer button.primary { background: var(--accent); border-color: var(--accent); color: white; font-weight: 600; }
+  .table-footer button.primary:hover { opacity: .9; }
+
+  /* Detail panel */
+  .detail-panel { display: none; background: var(--card); border-top: 1px solid var(--border); padding: 20px; }
+  .detail-panel.open { display: block; }
+  .detail-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .detail-item .label { font-size: .7rem; color: var(--dim); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 2px; }
+  .detail-item .value { font-size: .85rem; }
+
+  /* Toast */
+  .toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: #000; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: .82rem; opacity: 0; transition: opacity .2s; pointer-events: none; z-index: 100; }
+  .toast.show { opacity: 1; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .filters { flex-direction: column; }
+    .filters input { min-width: auto; }
+  }
+  @media (max-width: 480px) {
+    .stat-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1>UCC-1 MCA Leads</h1>
+      <div class="subtitle" id="subtitle">Loading…</div>
+    </div>
+    <div class="updated" id="updated"></div>
+  </header>
+
+  <div class="stat-grid">
+    <div class="stat-card"><div class="label">Total Leads</div><div class="value blue" id="stat-total">-</div></div>
+    <div class="stat-card"><div class="label">Hot &bull; Tier A</div><div class="value green" id="stat-hot">-</div></div>
+    <div class="stat-card"><div class="label">Warm &bull; Tier B</div><div class="value yellow" id="stat-warm">-</div></div>
+    <div class="stat-card"><div class="label">MCA Match Rate</div><div class="value blue" id="stat-mca">-</div></div>
+  </div>
+
+  <div class="filters">
+    <input id="search" placeholder="Search business, DBA, or funder…" oninput="render()">
+    <select id="tierFilter" onchange="render()">
+      <option value="">All Tiers</option><option value="A">Tier A</option><option value="B">Tier B</option><option value="C">Tier C</option><option value="D">Tier D</option>
+    </select>
+    <select id="stateFilter" onchange="render()"><option value="">All States</option></select>
+    <select id="funderFilter" onchange="render()">
+      <option value="">All Funders</option><option value="1">Tier 1 — Pure MCA</option><option value="2">Tier 2 — MCA+Other</option><option value="3">Tier 3 — Adjacent</option>
+    </select>
+    <select id="stackFilter" onchange="render()">
+      <option value="">Any Stack</option><option value="2">Stacked 2+</option><option value="3">Stacked 3+</option><option value="5">Stacked 5+</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sort('business_name')">Business Name<span class="sort" id="sort-name"></span></th>
+            <th onclick="sort('dba_name')">DBA<span class="sort" id="sort-dba"></span></th>
+            <th onclick="sort('business_city')">City/State<span class="sort" id="sort-city"></span></th>
+            <th onclick="sort('mca_funder_name')">Funder<span class="sort" id="sort-funder"></span></th>
+            <th onclick="sort('tier')">Tier</th>
+            <th onclick="sort('score_total')">Score<span class="sort" id="sort-score"></span></th>
+            <th onclick="sort('stack_count')">Stack<span class="sort" id="sort-stack"></span></th>
+            <th onclick="sort('filing_date')">Filed<span class="sort" id="sort-date"></span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <div class="table-footer">
+      <span id="showing">Showing 0 of 0 leads</span>
+      <div>
+        <button onclick="copyNames()">📋 Copy Names</button>
+        <button class="primary" onclick="exportCSV()">⬇ Export CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+// ── State ──
+let leads = [];
+let stats = {};
+let sortCol = 'score_total';
+let sortDir = -1;
+let activeRow = null;
+
+// ── Data ──
+async function init() {
+  try {
+    const r = await fetch('/data/leads.json');
+    const data = await r.json();
+    if (data.stats) { stats = data.stats; leads = data.leads; }
+    else { leads = Array.isArray(data) ? data : []; computeStats(); }
+  } catch(e) {
+    console.log('Loading sample data (no JSON found)');
+    leads = generateSampleLeads();
+    computeStats();
+  }
+  populateFilters();
+  applyHashFilters();
+  render();
+}
+
+function computeStats() {
+  const tiers = {};
+  let mca = 0;
+  for (const l of leads) { tiers[l.tier] = (tiers[l.tier]||0) + 1; if ([1,2].includes(l.mca_funder_tier)) mca++; }
+  stats = { total: leads.length, hot: tiers.A||0, warm: tiers.B||0, cold: tiers.C||0, archive: tiers.D||0, mca_match_rate: leads.length ? Math.round(mca/leads.length*1000)/10 : 0 };
+}
+
+function generateSampleLeads() {
+  const funders = [['YELLOWSTONE CAPITAL LLC',1],['FORWARD FINANCING LLC',1],['CELTIC BANK CORPORATION',2],['CFG MERCHANT SOLUTIONS LLC',1],['CREDIBLY CORPORATION',1],['KAPITUS SERVICING INC',1]];
+  const cities = [['Miami','FL'],['Brooklyn','NY'],['Orlando','FL'],['Tampa','FL'],['Dallas','TX'],['Chicago','IL']];
+  const industries = ['RESTAURANT','TRUCKING','CONSTRUCTION','MEDICAL','AUTO REPAIR','SALON','RETAIL','HOTEL','LANDSCAPING'];
+  const sample = [];
+  for (let i = 0; i < 40; i++) {
+    const f = funders[i % funders.length];
+    const c = cities[i % cities.length];
+    const ind = industries[i % industries.length];
+    const days = Math.floor(Math.random() * 365);
+    const d = new Date(); d.setDate(d.getDate() - days);
+    const score = 40 + Math.floor(Math.random() * 50);
+    const tier = score >= 80 ? 'A' : score >= 60 ? 'B' : score >= 40 ? 'C' : 'D';
+    sample.push({
+      lead_id: 'sample-' + i, business_name: `${c[0].toUpperCase()} ${ind} ${['LLC','INC','CORP'][i%3]}`, dba_name: i%3===0 ? `${['Joe\'s','Quick','Best','Ace'][i%4]} ${ind}` : '', business_city: c[0], business_state: c[1], mca_funder_name: f[0], mca_funder_tier: f[1], stack_count: 1 + Math.floor(Math.random()*4), score_total: score, tier, filing_date: d.toISOString().split('T')[0], filing_state: c[1], filing_number: `${c[1]}-2024-${String(i+1).padStart(4,'0')}`, collateral_type: ['mca_receivables','general_business_assets','equipment'][i%3]
+    });
+  }
+  return sample;
+}
+
+function populateFilters() {
+  const states = [...new Set(leads.map(l => l.filing_state || l.business_state).filter(Boolean))].sort();
+  const sel = document.getElementById('stateFilter');
+  for (const s of states) { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); }
+}
+
+function applyHashFilters() {
+  const h = location.hash.replace('#','');
+  if (!h) return;
+  for (const part of h.split('&')) {
+    const [k,v] = part.split('=');
+    const el = document.getElementById({tier:'tierFilter',state:'stateFilter',funder:'funderFilter',stack:'stackFilter',q:'search'}[k]);
+    if (el) { el.value = v; if (k==='q') document.getElementById('search').value = decodeURIComponent(v); }
+  }
+}
+
+// ── Render ──
+function render() {
+  const q = (document.getElementById('search').value || '').toLowerCase();
+  const tierF = document.getElementById('tierFilter').value;
+  const stateF = document.getElementById('stateFilter').value;
+  const funderF = document.getElementById('funderFilter').value;
+  const stackF = parseInt(document.getElementById('stackFilter').value) || 0;
+
+  let filtered = leads.filter(l => {
+    if (q && ![l.business_name||'', l.dba_name||'', l.mca_funder_name||''].some(s => s.toLowerCase().includes(q))) return false;
+    if (tierF && l.tier !== tierF) return false;
+    if (stateF && l.filing_state !== stateF && l.business_state !== stateF) return false;
+    if (funderF && String(l.mca_funder_tier) !== funderF) return false;
+    if (stackF && (l.stack_count || 1) < stackF) return false;
+    return true;
+  });
+
+  filtered.sort((a,b) => {
+    let va = a[sortCol] ?? '', vb = b[sortCol] ?? '';
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = (vb||'').toLowerCase(); }
+    return va > vb ? sortDir : va < vb ? -sortDir : 0;
+  });
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = filtered.slice(0, 500).map(l => {
+    const sc = l.score_total || 0;
+    const barCls = sc >= 80 ? 'high' : sc >= 60 ? 'mid' : 'low';
+    const stack = l.stack_count || 1;
+    const fd = l.filing_date ? new Date(l.filing_date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '?';
+    return `<tr onclick="toggleDetail(this, '${l.lead_id}')">
+      <td><strong>${esc(l.business_name)}</strong></td>
+      <td>${esc(l.dba_name||'—')}</td>
+      <td>${esc(l.business_city||'?')}, ${esc(l.filing_state||l.business_state||'?')}</td>
+      <td>${esc(l.mca_funder_name||'?')}</td>
+      <td><span class="tier-badge tier-${l.tier}">${l.tier}</span></td>
+      <td><span class="score-bar"><span class="fill ${barCls}" style="width:${sc}%"></span></span>${sc}</td>
+      <td>${stack >= 3 ? `<span class="stack-badge stacked">${stack}</span>` : stack}</td>
+      <td>${fd}</td>
+    </tr>
+    <tr class="detail-row" style="display:none" id="detail-${l.lead_id}">
+      <td colspan="8"><div class="detail-grid">
+        <div class="detail-item"><div class="label">Lead ID</div><div class="value">${esc(l.lead_id)}</div></div>
+        <div class="detail-item"><div class="label">Filing Number</div><div class="value">${esc(l.filing_number||'?')}</div></div>
+        <div class="detail-item"><div class="label">Filing Date</div><div class="value">${fd}</div></div>
+        <div class="detail-item"><div class="label">Collateral Type</div><div class="value">${esc(l.collateral_type||'unknown')}</div></div>
+        <div class="detail-item"><div class="label">Address</div><div class="value">${esc(l.business_address||'N/A')}</div></div>
+        <div class="detail-item"><div class="label">Funder Tier</div><div class="value">${['?','Pure MCA','MCA+Other','Adjacent'][l.mca_funder_tier||0]||'Traditional'}</div></div>
+        <div class="detail-item"><div class="label">Stack Count</div><div class="value">${stack} active position${stack>1?'s':''}</div></div>
+        <div class="detail-item"><div class="label">Phone</div><div class="value">${esc(l.phone_number||'— (needs skip trace)')}</div></div>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('showing').textContent = `Showing ${Math.min(filtered.length,500)} of ${filtered.length} leads`;
+  document.getElementById('stat-total').textContent = stats.total.toLocaleString();
+  document.getElementById('stat-hot').textContent = stats.hot;
+  document.getElementById('stat-warm').textContent = stats.warm;
+  document.getElementById('stat-mca').textContent = stats.mca_match_rate + '%';
+  document.getElementById('subtitle').textContent = `${stats.hot} hot · ${stats.warm} warm · ${stats.cold} cold leads ready for outreach`;
+  if (stats.updated) document.getElementById('updated').textContent = 'Updated ' + new Date(stats.updated).toLocaleString();
+  else document.getElementById('updated').textContent = '';
+}
+
+function toggleDetail(rowEl, leadId) {
+  const detailRow = document.getElementById('detail-' + leadId);
+  if (!detailRow) return;
+  const open = detailRow.style.display !== 'none';
+  detailRow.style.display = open ? 'none' : 'table-row';
+}
+
+function sort(col) {
+  if (sortCol === col) sortDir *= -1; else { sortCol = col; sortDir = -1; }
+  document.querySelectorAll('.sort').forEach(s => s.textContent = '');
+  const label = document.getElementById('sort-' + ({business_name:'name',dba_name:'dba',business_city:'city',mca_funder_name:'funder',score_total:'score',stack_count:'stack',filing_date:'date'}[col]||''));
+  if (label) label.textContent = sortDir === 1 ? '▲' : '▼';
+  render();
+}
+
+function exportCSV() {
+  const rows = [['Business Name','DBA','City','State','Funder','Funder Tier','Score','Stack','Tier','Filing Date','Filing Number','Collateral Type'].join(',')];
+  for (const l of leads) rows.push([l.business_name,l.dba_name||'',l.business_city||'',l.business_state||l.filing_state||'',l.mca_funder_name||'',l.mca_funder_tier||'',l.score_total,l.stack_count||1,l.tier,l.filing_date||'',l.filing_number||'',l.collateral_type||''].map(c => '"'+String(c).replace(/"/g,'""')+'"').join(','));
+  const blob = new Blob([rows.join('\n')], {type:'text/csv'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ucc1_leads_' + new Date().toISOString().split('T')[0] + '.csv'; a.click();
+  toast('Exported ' + leads.length + ' leads');
+}
+
+function copyNames() {
+  const names = leads.map(l => l.business_name + (l.business_city ? ' — ' + l.business_city + ', ' + (l.business_state||l.filing_state||'') : '')).join('\n');
+  navigator.clipboard.writeText(names);
+  toast('Copied ' + leads.length + ' business names');
+}
+
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); }
+function esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+init();
+</script>
+</body>
+</html>

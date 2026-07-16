@@ -1,0 +1,2669 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "last_updated": "2026-07-16",
+    "total_funders": 165,
+    "description": "Known MCA (Merchant Cash Advance) funders and their legal entities. Used to identify MCA-related UCC-1 filings. Tier 1 = Pure MCA, Tier 2 = MCA + Other Lending, Tier 3 = Adjacent Alternative Lending.",
+    "maintainer_note": "Add new funders as they are discovered. Update DBAs when funders rebrand. Verify tiers quarterly."
+  },
+  "funders": [
+    {
+      "id": "mca-001",
+      "legal_name": "YELLOWSTONE CAPITAL LLC",
+      "dbas": [
+        "YELLOWSTONE CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ",
+        "GA",
+        "PA"
+      ],
+      "notes": "One of the largest MCA funders. Frequent UCC filer."
+    },
+    {
+      "id": "mca-002",
+      "legal_name": "FORWARD FINANCING LLC",
+      "dbas": [
+        "FORWARD FINANCING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-750000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "Major MCA funder, also does SBA. Very active UCC filer."
+    },
+    {
+      "id": "mca-003",
+      "legal_name": "PEARL CAPITAL BUSINESS FUNDING LLC",
+      "dbas": [
+        "PEARL CAPITAL",
+        "PEARL BFS"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Large MCA funder, frequent UCC filer."
+    },
+    {
+      "id": "mca-004",
+      "legal_name": "KAPITUS SERVICING INC",
+      "dbas": [
+        "KAPITUS"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "Major MCA/alternative lender. Formerly Strategic Funding Source."
+    },
+    {
+      "id": "mca-005",
+      "legal_name": "ONECK CAPITAL LLC",
+      "dbas": [
+        "ONECK CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Large alt lender, does MCA and term loans."
+    },
+    {
+      "id": "mca-006",
+      "legal_name": "CREDIBLY CORPORATION",
+      "dbas": [
+        "CREDIBLY"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "Pure MCA funder, active UCC filer."
+    },
+    {
+      "id": "mca-007",
+      "legal_name": "EXPANSION CAPITAL GROUP LLC",
+      "dbas": [
+        "EXPANSION CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-008",
+      "legal_name": "EVEREST BUSINESS FUNDING LLC",
+      "dbas": [
+        "EVEREST BUSINESS FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-750000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder, part of the Everest group."
+    },
+    {
+      "id": "mca-009",
+      "legal_name": "RAPID ADVANCE LLC",
+      "dbas": [
+        "RAPID ADVANCE",
+        "RAPIDADVANCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Well-known MCA funder. Very active in UCC filings."
+    },
+    {
+      "id": "mca-010",
+      "legal_name": "SNAP ADVANCES LLC",
+      "dbas": [
+        "SNAP ADVANCES"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-011",
+      "legal_name": "CFG MERCHANT SOLUTIONS LLC",
+      "dbas": [
+        "CFG MERCHANT SOLUTIONS",
+        "CAPSTONE FINANCIAL GROUP"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "Large MCA funder."
+    },
+    {
+      "id": "mca-012",
+      "legal_name": "LEGEND ADVANCE FUNDING LLC",
+      "dbas": [
+        "LEGEND ADVANCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-013",
+      "legal_name": "FOX CAPITAL GROUP INC",
+      "dbas": [
+        "FOX CAPITAL GROUP",
+        "FOX CAPITAL",
+        "FOX FUNDING GROUP"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-014",
+      "legal_name": "NATIONAL FUNDING INC",
+      "dbas": [
+        "NATIONAL FUNDING",
+        "NATIONAL BUSINESS CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA and equipment financing."
+    },
+    {
+      "id": "mca-015",
+      "legal_name": "PARK VIEW CAPITAL FUNDING LLC",
+      "dbas": [
+        "PARK VIEW CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-016",
+      "legal_name": "BANKCARD CAPITAL LLC",
+      "dbas": [
+        "BANKCARD CAPITAL",
+        "BANKCARD FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder focused on retail/merchants."
+    },
+    {
+      "id": "mca-017",
+      "legal_name": "PINNACLE ADVANCE LLC",
+      "dbas": [
+        "PINNACLE ADVANCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-018",
+      "legal_name": "GREENBOX CAPITAL LLC",
+      "dbas": [
+        "GREENBOX CAPITAL",
+        "GREEN BOX CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-019",
+      "legal_name": "POWERUP FUNDING LLC",
+      "dbas": [
+        "POWERUP FUNDING",
+        "POWER UP FUNDING",
+        "POWERUP LENDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-020",
+      "legal_name": "LIBERTY CAPITAL GROUP LLC",
+      "dbas": [
+        "LIBERTY CAPITAL GROUP"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-021",
+      "legal_name": "BANKERS HEALTHCARE GROUP LLC",
+      "dbas": [
+        "BANKERS HEALTHCARE GROUP",
+        "BHG"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "Healthcare-focused MCA/lender."
+    },
+    {
+      "id": "mca-022",
+      "legal_name": "LENDIO INC",
+      "dbas": [
+        "LENDIO"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA marketplace and direct funder."
+    },
+    {
+      "id": "mca-023",
+      "legal_name": "FUNDKITE LLC",
+      "dbas": [
+        "FUNDKITE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 120,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder and marketplace."
+    },
+    {
+      "id": "mca-024",
+      "legal_name": "CAN CAPITAL INC",
+      "dbas": [
+        "CAN CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Established MCA funder."
+    },
+    {
+      "id": "mca-025",
+      "legal_name": "QUICK BRIDGE FUNDING LLC",
+      "dbas": [
+        "QUICK BRIDGE",
+        "QUICKBRIDGE"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA and bridge loans."
+    },
+    {
+      "id": "mca-026",
+      "legal_name": "MULLIGAN FUNDING LLC",
+      "dbas": [
+        "MULLIGAN FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-027",
+      "legal_name": "SAMSON FUNDING LLC",
+      "dbas": [
+        "SAMSON FUNDING",
+        "SAMSON CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-028",
+      "legal_name": "COOPER ASSET MANAGEMENT LLC",
+      "dbas": [
+        "COOPER ASSET MANAGEMENT",
+        "COOPER FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-029",
+      "legal_name": "UNITED CAPITAL SOURCE LLC",
+      "dbas": [
+        "UNITED CAPITAL SOURCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-030",
+      "legal_name": "CRESTHILL CAPITAL LLC",
+      "dbas": [
+        "CRESTHILL CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA and equipment financing."
+    },
+    {
+      "id": "mca-031",
+      "legal_name": "TMC FINANCING LLC",
+      "dbas": [
+        "TMC FINANCING",
+        "TMC CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder focused on trucking/transportation."
+    },
+    {
+      "id": "mca-032",
+      "legal_name": "SFS HOLDINGS LLC",
+      "dbas": [
+        "STRATEGIC FUNDING SOURCE",
+        "SFS"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Major MCA funder (renamed/acquired by Kapitus). Historical filings may still show."
+    },
+    {
+      "id": "mca-033",
+      "legal_name": "WORLD GLOBAL FUNDING LLC",
+      "dbas": [
+        "WORLD GLOBAL FUNDING",
+        "WGF"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-034",
+      "legal_name": "FINANCE FUNDING LLC",
+      "dbas": [
+        "FINANCE FUNDING",
+        "FUNDING CIRCLE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-035",
+      "legal_name": "BIZ2CREDIT INC",
+      "dbas": [
+        "BIZ2CREDIT"
+      ],
+      "tier": 1,
+      "typical_advance": "25000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "Online small business lending platform, MCA + SBA."
+    },
+    {
+      "id": "mca-036",
+      "legal_name": "FUNDBOX INC",
+      "dbas": [
+        "FUNDBOX"
+      ],
+      "tier": 1,
+      "typical_advance": "1000-150000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "Invoice factoring + MCA for small businesses."
+    },
+    {
+      "id": "mca-037",
+      "legal_name": "BLUEVINE CAPITAL INC",
+      "dbas": [
+        "BLUEVINE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Online small business lender, MCA + line of credit."
+    },
+    {
+      "id": "mca-038",
+      "legal_name": "CREDIT CASH LLC",
+      "dbas": [
+        "CREDIT CASH",
+        "CREDITCASH"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-200000",
+      "typical_term_days": 120,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder focused on small advances."
+    },
+    {
+      "id": "mca-039",
+      "legal_name": "NYC CAPITAL LLC",
+      "dbas": [
+        "NYC CAPITAL",
+        "NY CAPITAL GROUP"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "NJ"
+      ],
+      "notes": "NY area MCA funder."
+    },
+    {
+      "id": "mca-040",
+      "legal_name": "MAIN STREET FUNDING LLC",
+      "dbas": [
+        "MAIN STREET FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-041",
+      "legal_name": "CELTIC BANK CORPORATION",
+      "dbas": [
+        "CELTIC BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "SBA lender that also funds MCA through partners. Utah-based industrial bank."
+    },
+    {
+      "id": "mca-042",
+      "legal_name": "WEBBANK",
+      "dbas": [
+        "WEBBANK",
+        "WEB BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Issues MCA/lending through partners (PayPal, Affirm, etc.)."
+    },
+    {
+      "id": "mca-043",
+      "legal_name": "CROSS RIVER BANK",
+      "dbas": [
+        "CROSS RIVER BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Bank that partners with many fintech/MCA companies."
+    },
+    {
+      "id": "mca-044",
+      "legal_name": "CUSTOMERS BANK",
+      "dbas": [
+        "CUSTOMERS BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "PA",
+        "NJ"
+      ],
+      "notes": "Regional bank that does MCA/SBA lending."
+    },
+    {
+      "id": "mca-045",
+      "legal_name": "EAST WEST BANK",
+      "dbas": [
+        "EAST WEST BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "CA",
+        "NY",
+        "TX"
+      ],
+      "notes": "Commercial bank that does some alt lending."
+    },
+    {
+      "id": "mca-046",
+      "legal_name": "PACIFIC WESTERN BANK",
+      "dbas": [
+        "PACIFIC WESTERN BANK",
+        "PACWEST"
+      ],
+      "tier": 2,
+      "typical_advance": "100000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "CA",
+        "CO",
+        "TX"
+      ],
+      "notes": "Commercial bank with small business lending."
+    },
+    {
+      "id": "mca-047",
+      "legal_name": "AXOS BANK",
+      "dbas": [
+        "AXOS BANK",
+        "BANK OF INTERNET USA"
+      ],
+      "tier": 2,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Online bank that partners with MCA funders."
+    },
+    {
+      "id": "mca-048",
+      "legal_name": "BANKUNITED NA",
+      "dbas": [
+        "BANKUNITED"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "FL",
+        "NY"
+      ],
+      "notes": "Florida bank that funds some MCA."
+    },
+    {
+      "id": "mca-049",
+      "legal_name": "BBVA USA",
+      "dbas": [
+        "BBVA",
+        "BBVA COMPASS"
+      ],
+      "tier": 2,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "TX",
+        "AL",
+        "AZ",
+        "CA",
+        "CO",
+        "FL",
+        "NM"
+      ],
+      "notes": "Commercial bank (acquired by PNC, but legacy filings exist)."
+    },
+    {
+      "id": "mca-050",
+      "legal_name": "SUTTON BANK",
+      "dbas": [
+        "SUTTON BANK"
+      ],
+      "tier": 2,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "OH",
+        "ALL"
+      ],
+      "notes": "Issues prepaid cards and partners with fintech/MCA firms."
+    },
+    {
+      "id": "mca-051",
+      "legal_name": "BALBOA CAPITAL CORPORATION",
+      "dbas": [
+        "BALBOA CAPITAL"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-5000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "CA",
+        "TX",
+        "NY",
+        "FL"
+      ],
+      "notes": "Equipment finance + some MCA-adjacent lending."
+    },
+    {
+      "id": "mca-052",
+      "legal_name": "CIT BANK NA",
+      "dbas": [
+        "CIT BANK",
+        "CIT GROUP"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Equipment finance, factoring, and some MCA."
+    },
+    {
+      "id": "mca-053",
+      "legal_name": "MUFG UNION BANK NA",
+      "dbas": [
+        "MUFG",
+        "UNION BANK"
+      ],
+      "tier": 3,
+      "typical_advance": "250000-50000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "CA",
+        "NY",
+        "TX",
+        "IL"
+      ],
+      "notes": "Large commercial bank with asset-based lending."
+    },
+    {
+      "id": "mca-054",
+      "legal_name": "TCF NATIONAL BANK",
+      "dbas": [
+        "TCF BANK",
+        "TCF"
+      ],
+      "tier": 3,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "IL",
+        "MN",
+        "MI",
+        "CO",
+        "OH",
+        "WI"
+      ],
+      "notes": "Midwest bank with equipment finance division."
+    },
+    {
+      "id": "mca-055",
+      "legal_name": "FIFTH THIRD BANK NA",
+      "dbas": [
+        "FIFTH THIRD BANK"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "OH",
+        "KY",
+        "IN",
+        "IL",
+        "MI",
+        "FL",
+        "GA",
+        "NC",
+        "TN",
+        "WV"
+      ],
+      "notes": "Regional bank with small business lending."
+    },
+    {
+      "id": "mca-056",
+      "legal_name": "CRESTMARK BANK",
+      "dbas": [
+        "CRESTMARK"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-5000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "MI",
+        "ALL"
+      ],
+      "notes": "Equipment finance and small business lending."
+    },
+    {
+      "id": "mca-057",
+      "legal_name": "AMUR EQUIPMENT FINANCE INC",
+      "dbas": [
+        "AMUR",
+        "AMUR FINANCE"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-10000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "NE",
+        "ALL"
+      ],
+      "notes": "Equipment finance \u2014 adjacent to MCA market."
+    },
+    {
+      "id": "mca-058",
+      "legal_name": "ASGARD CAPITAL LLC",
+      "dbas": [
+        "ASGARD CAPITAL",
+        "ASGARD PARTNERS"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-5000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "NY",
+        "CA",
+        "TX"
+      ],
+      "notes": "Equipment + working capital."
+    },
+    {
+      "id": "mca-059",
+      "legal_name": "TRITON CAPITAL LLC",
+      "dbas": [
+        "TRITON CAPITAL"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "Equipment finance, some MCA."
+    },
+    {
+      "id": "mca-060",
+      "legal_name": "ALLIANCE FUNDING GROUP",
+      "dbas": [
+        "ALLIANCE FUNDING",
+        "ALLIANCE FUNDING GROUP"
+      ],
+      "tier": 3,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "Small business funding, MCA-adjacent."
+    },
+    {
+      "id": "mca-061",
+      "legal_name": "ONEPARK FINANCIAL LLC",
+      "dbas": [
+        "ONEPARK FINANCIAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-062",
+      "legal_name": "SQUARE CAPITAL LLC",
+      "dbas": [
+        "SQUARE CAPITAL",
+        "BLOCK INC"
+      ],
+      "tier": 1,
+      "typical_advance": "500-250000",
+      "typical_term_days": 540,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Square/Block's MCA arm \u2014 files UCCs for Square Loans."
+    },
+    {
+      "id": "mca-063",
+      "legal_name": "PAYPAL WORKING CAPITAL LLC",
+      "dbas": [
+        "PAYPAL WORKING CAPITAL",
+        "PAYPAL INC"
+      ],
+      "tier": 1,
+      "typical_advance": "1000-250000",
+      "typical_term_days": 540,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "PayPal's MCA arm \u2014 files UCCs."
+    },
+    {
+      "id": "mca-064",
+      "legal_name": "STRIPE CAPITAL LLC",
+      "dbas": [
+        "STRIPE CAPITAL",
+        "STRIPE INC"
+      ],
+      "tier": 1,
+      "typical_advance": "1000-500000",
+      "typical_term_days": 540,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Stripe's MCA arm \u2014 files UCCs."
+    },
+    {
+      "id": "mca-065",
+      "legal_name": "SHOPIFY CAPITAL LLC",
+      "dbas": [
+        "SHOPIFY CAPITAL",
+        "SHOPIFY INC"
+      ],
+      "tier": 1,
+      "typical_advance": "200-2000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Shopify's MCA arm \u2014 files UCCs."
+    },
+    {
+      "id": "mca-066",
+      "legal_name": "AMAZON CAPITAL SERVICES INC",
+      "dbas": [
+        "AMAZON CAPITAL",
+        "AMAZON LENDING"
+      ],
+      "tier": 1,
+      "typical_advance": "1000-750000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Amazon's small business lending."
+    },
+    {
+      "id": "mca-067",
+      "legal_name": "ONEMAIN FINANCIAL GROUP LLC",
+      "dbas": [
+        "ONEMAIN FINANCIAL"
+      ],
+      "tier": 2,
+      "typical_advance": "1500-20000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer + small business lending."
+    },
+    {
+      "id": "mca-068",
+      "legal_name": "ENOVA INTERNATIONAL INC",
+      "dbas": [
+        "ENOVA",
+        "ONECK",
+        "NETCREDIT"
+      ],
+      "tier": 2,
+      "typical_advance": "500-10000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer lending + small business."
+    },
+    {
+      "id": "mca-069",
+      "legal_name": "LENDINGCLUB BANK NA",
+      "dbas": [
+        "LENDINGCLUB",
+        "LENDING CLUB"
+      ],
+      "tier": 2,
+      "typical_advance": "1000-40000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer + small business lending."
+    },
+    {
+      "id": "mca-070",
+      "legal_name": "PROSPER FUNDING LLC",
+      "dbas": [
+        "PROSPER",
+        "PROSPER MARKETPLACE"
+      ],
+      "tier": 2,
+      "typical_advance": "2000-40000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer/small business marketplace lending."
+    },
+    {
+      "id": "mca-071",
+      "legal_name": "FUNDING CIRCLE USA INC",
+      "dbas": [
+        "FUNDING CIRCLE"
+      ],
+      "tier": 1,
+      "typical_advance": "25000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Small business term loans \u2014 files UCCs."
+    },
+    {
+      "id": "mca-072",
+      "legal_name": "OPPORTUN INC",
+      "dbas": [
+        "OPPORTUN"
+      ],
+      "tier": 2,
+      "typical_advance": "300-10000",
+      "typical_term_days": 730,
+      "states_active": [
+        "CA",
+        "TX",
+        "FL",
+        "AZ",
+        "NV",
+        "IL",
+        "NJ"
+      ],
+      "notes": "Consumer + small business lending."
+    },
+    {
+      "id": "mca-073",
+      "legal_name": "MARLETTE FUNDING LLC",
+      "dbas": [
+        "MARLETTE FUNDING",
+        "MARLETTE"
+      ],
+      "tier": 2,
+      "typical_advance": "1000-35000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer lending platform (Cross River Bank partner)."
+    },
+    {
+      "id": "mca-074",
+      "legal_name": "UPGRADE INC",
+      "dbas": [
+        "UPGRADE"
+      ],
+      "tier": 2,
+      "typical_advance": "1000-50000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer credit + some small business."
+    },
+    {
+      "id": "mca-075",
+      "legal_name": "HAPPY MONEY INC",
+      "dbas": [
+        "HAPPY MONEY",
+        "PAYOFF"
+      ],
+      "tier": 2,
+      "typical_advance": "5000-40000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer lending, some small business."
+    },
+    {
+      "id": "mca-076",
+      "legal_name": "BEST EGG INC",
+      "dbas": [
+        "BEST EGG",
+        "MARINER FINANCE"
+      ],
+      "tier": 2,
+      "typical_advance": "2000-50000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer lending, some small business."
+    },
+    {
+      "id": "mca-077",
+      "legal_name": "AVANT LLC",
+      "dbas": [
+        "AVANT",
+        "AVANTCARD"
+      ],
+      "tier": 2,
+      "typical_advance": "1000-35000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer + small business."
+    },
+    {
+      "id": "mca-078",
+      "legal_name": "LOANPAL LLC",
+      "dbas": [
+        "LOANPAL"
+      ],
+      "tier": 2,
+      "typical_advance": "1000-50000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Consumer/solar + some small business."
+    },
+    {
+      "id": "mca-079",
+      "legal_name": "GOODLEAP LLC",
+      "dbas": [
+        "GOODLEAP",
+        "LOANPAL SOLAR"
+      ],
+      "tier": 2,
+      "typical_advance": "5000-100000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Green energy financing \u2014 files UCCs."
+    },
+    {
+      "id": "mca-080",
+      "legal_name": "DIVVY INC",
+      "dbas": [
+        "DIVVY",
+        "DIVVY PAY"
+      ],
+      "tier": 1,
+      "typical_advance": "1000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Corporate card + spend management (acquired by Bill.com). Files UCCs."
+    },
+    {
+      "id": "mca-081",
+      "legal_name": "RAM CAPITAL FUNDING LLC",
+      "dbas": [
+        "RAM CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-082",
+      "legal_name": "FUNDWORKS LLC",
+      "dbas": [
+        "FUNDWORKS"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-083",
+      "legal_name": "SOUTHERN CAPITAL GROUP LLC",
+      "dbas": [
+        "SOUTHERN CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "FL",
+        "GA",
+        "AL",
+        "TX"
+      ],
+      "notes": "MCA funder focused on Southeast."
+    },
+    {
+      "id": "mca-084",
+      "legal_name": "GOLDMAN SACHS BANK USA",
+      "dbas": [
+        "GOLDMAN SACHS",
+        "GS BANK",
+        "MARCUS"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Marcus small business + consumer lending."
+    },
+    {
+      "id": "mca-085",
+      "legal_name": "AMERICAN EXPRESS NATIONAL BANK",
+      "dbas": [
+        "AMERICAN EXPRESS",
+        "AMEX"
+      ],
+      "tier": 3,
+      "typical_advance": "1000-50000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Amex small business loans \u2014 files UCCs."
+    },
+    {
+      "id": "mca-086",
+      "legal_name": "BREX INC",
+      "dbas": [
+        "BREX"
+      ],
+      "tier": 2,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Corporate card + small business lending."
+    },
+    {
+      "id": "mca-087",
+      "legal_name": "RAMP BUSINESS CORPORATION",
+      "dbas": [
+        "RAMP",
+        "RAMP FINANCIAL"
+      ],
+      "tier": 2,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Corporate card with working capital \u2014 files UCCs."
+    },
+    {
+      "id": "mca-088",
+      "legal_name": "PIPE TECHNOLOGIES INC",
+      "dbas": [
+        "PIPE"
+      ],
+      "tier": 3,
+      "typical_advance": "50000-10000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing platform."
+    },
+    {
+      "id": "mca-089",
+      "legal_name": "CLEARCO INC",
+      "dbas": [
+        "CLEARCO",
+        "CLEARBANC"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-10000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing (e-commerce focus). Files UCCs."
+    },
+    {
+      "id": "mca-090",
+      "legal_name": "WAYFLYER INC",
+      "dbas": [
+        "WAYFLYER"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-20000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing. Files UCCs."
+    },
+    {
+      "id": "mca-091",
+      "legal_name": "SETTLE INC",
+      "dbas": [
+        "SETTLE"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Working capital for CPG brands."
+    },
+    {
+      "id": "mca-092",
+      "legal_name": "EIGHTFIGHT INC",
+      "dbas": [
+        "EIGHTFIGHT",
+        "8FIGHT",
+        "8FIG"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "E-commerce working capital."
+    },
+    {
+      "id": "mca-093",
+      "legal_name": "SACRAMENTO CREDIT UNION",
+      "dbas": [
+        "SAC CU"
+      ],
+      "tier": 3,
+      "typical_advance": "5000-50000",
+      "typical_term_days": 730,
+      "states_active": [
+        "CA"
+      ],
+      "notes": "Credit union small business lending."
+    },
+    {
+      "id": "mca-094",
+      "legal_name": "NOVEL CAPITAL LLC",
+      "dbas": [
+        "NOVEL CAPITAL",
+        "NOVEL GROWTH PARTNERS"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-1000000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing + venture debt."
+    },
+    {
+      "id": "mca-095",
+      "legal_name": "FLYER CAPITAL LLC",
+      "dbas": [
+        "FLYER CAPITAL"
+      ],
+      "tier": 3,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing."
+    },
+    {
+      "id": "mca-096",
+      "legal_name": "CAPCHASE INC",
+      "dbas": [
+        "CAPCHASE"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Revenue-based financing platform."
+    },
+    {
+      "id": "mca-097",
+      "legal_name": "BOOST CAPITAL LLC",
+      "dbas": [
+        "BOOST CAPITAL",
+        "BOOST"
+      ],
+      "tier": 2,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 730,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Small business lending platform."
+    },
+    {
+      "id": "mca-098",
+      "legal_name": "HEADWAY CAPITAL LLC",
+      "dbas": [
+        "HEADWAY CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 730,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "Small business lending \u2014 MCA and term loans."
+    },
+    {
+      "id": "mca-099",
+      "legal_name": "SMARTBIZ LOANS LLC",
+      "dbas": [
+        "SMARTBIZ",
+        "SMARTBIZ LOANS"
+      ],
+      "tier": 1,
+      "typical_advance": "30000-350000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "SBA + MCA marketplace. Files UCCs."
+    },
+    {
+      "id": "mca-100",
+      "legal_name": "WOMEN CAPITAL LLC",
+      "dbas": [
+        "WOMEN CAPITAL",
+        "WOMENS CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder focused on women-owned businesses."
+    },
+    {
+      "id": "mca-101",
+      "legal_name": "NEXTWAVE FUNDING LLC",
+      "dbas": [
+        "NEXTWAVE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-102",
+      "legal_name": "MAVERICK FUNDING LLC",
+      "dbas": [
+        "MAVERICK FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-103",
+      "legal_name": "IRON HORSE CREDIT LLC",
+      "dbas": [
+        "IRON HORSE CREDIT",
+        "IRON HORSE FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-104",
+      "legal_name": "ATLAS CAPITAL LLC",
+      "dbas": [
+        "ATLAS CAPITAL",
+        "ATLAS FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-105",
+      "legal_name": "BLACKROCK CAPITAL LLC",
+      "dbas": [
+        "BLACKROCK CAPITAL FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder (not the asset manager BlackRock)."
+    },
+    {
+      "id": "mca-106",
+      "legal_name": "PARAMOUNT MERCHANT FUNDING LLC",
+      "dbas": [
+        "PARAMOUNT FUNDING",
+        "PARAMOUNT MERCHANT"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-107",
+      "legal_name": "TVT CAPITAL LLC",
+      "dbas": [
+        "TVT CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-108",
+      "legal_name": "VITALCAP FUND LLC",
+      "dbas": [
+        "VITALCAP",
+        "VITAL CAPITAL FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-109",
+      "legal_name": "WISE CAPITAL LLC",
+      "dbas": [
+        "WISE CAPITAL",
+        "WISE FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-110",
+      "legal_name": "AMERICAN FUNDING GROUP LLC",
+      "dbas": [
+        "AMERICAN FUNDING GROUP",
+        "AMERICAN BUSINESS FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-111",
+      "legal_name": "MAX ADVANCE LLC",
+      "dbas": [
+        "MAX ADVANCE",
+        "MAXADVANCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-112",
+      "legal_name": "LG FUNDING LLC",
+      "dbas": [
+        "LG FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-113",
+      "legal_name": "GREEN STREET CAPITAL LLC",
+      "dbas": [
+        "GREEN STREET CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-114",
+      "legal_name": "NEWCO CAPITAL GROUP LLC",
+      "dbas": [
+        "NEWCO CAPITAL GROUP",
+        "NEWCO CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "10000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL",
+        "NJ"
+      ],
+      "notes": "MCA and equipment finance."
+    },
+    {
+      "id": "mca-115",
+      "legal_name": "DELTA CAPITAL LLC",
+      "dbas": [
+        "DELTA CAPITAL",
+        "DELTA FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-116",
+      "legal_name": "BUSINESS CAPITAL GROUP LLC",
+      "dbas": [
+        "BUSINESS CAPITAL GROUP",
+        "BCG"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-117",
+      "legal_name": "MCG CAPITAL LLC",
+      "dbas": [
+        "MCG CAPITAL",
+        "MERCHANT CAPITAL GROUP"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-118",
+      "legal_name": "VELOCITY FUNDING LLC",
+      "dbas": [
+        "VELOCITY FUNDING",
+        "VELOCITY CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-119",
+      "legal_name": "PRIME FUNDING LLC",
+      "dbas": [
+        "PRIME FUNDING",
+        "PRIME BUSINESS FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-120",
+      "legal_name": "ELEMENT FUNDING LLC",
+      "dbas": [
+        "ELEMENT FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-121",
+      "legal_name": "IOU FINANCIAL INC",
+      "dbas": [
+        "IOU FINANCIAL",
+        "IOU CENTRAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": "Publicly traded small business lender."
+    },
+    {
+      "id": "mca-122",
+      "legal_name": "ONEAIR CAPITAL LLC",
+      "dbas": [
+        "ONEAIR CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-123",
+      "legal_name": "BRIGHTON CAPITAL LLC",
+      "dbas": [
+        "BRIGHTON CAPITAL",
+        "BRIGHTON FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-124",
+      "legal_name": "WALL STREET FUNDING LLC",
+      "dbas": [
+        "WALL STREET FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "NJ",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder based in NY area."
+    },
+    {
+      "id": "mca-125",
+      "legal_name": "CORPORATE MERCHANT FUNDING LLC",
+      "dbas": [
+        "CORPORATE MERCHANT FUNDING"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-126",
+      "legal_name": "PREMIUM MERCHANT FUNDING LLC",
+      "dbas": [
+        "PREMIUM MERCHANT FUNDING",
+        "PREMIUM CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-127",
+      "legal_name": "EPIC ADVANCE LLC",
+      "dbas": [
+        "EPIC ADVANCE",
+        "EPIC CAPITAL"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-300000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-128",
+      "legal_name": "AMERICAN ADVANCE LLC",
+      "dbas": [
+        "AMERICAN ADVANCE",
+        "AMERICAN BUSINESS ADVANCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 150,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-129",
+      "legal_name": "MERCHANT CAPITAL SOURCE LLC",
+      "dbas": [
+        "MERCHANT CAPITAL SOURCE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 240,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX",
+        "IL"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-130",
+      "legal_name": "CASHABLE LLC",
+      "dbas": [
+        "CASHABLE"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "NY",
+        "CA",
+        "FL",
+        "TX"
+      ],
+      "notes": "MCA funder."
+    },
+    {
+      "id": "mca-131",
+      "legal_name": "STREET SHARES INC",
+      "dbas": [
+        "StreetShares"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-132",
+      "legal_name": "FORA FINANCIAL HOLDINGS LLC",
+      "dbas": [
+        "Fora Financial"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-750000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-133",
+      "legal_name": "BFS CAPITAL LLC",
+      "dbas": [
+        "BFS Capital"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-134",
+      "legal_name": "RELIANT FUNDING LLC",
+      "dbas": [
+        "Reliant Funding"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-400000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-135",
+      "legal_name": "MANTIS FUNDING LLC",
+      "dbas": [
+        "Mantis Funding"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-136",
+      "legal_name": "PLATINUM RAPID FUNDING GROUP LLC",
+      "dbas": [
+        "Platinum Rapid Funding"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-137",
+      "legal_name": "RAPID FINANCE LLC",
+      "dbas": [
+        "Rapid Finance"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-1000000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-138",
+      "legal_name": "ARF FINANCIAL LLC",
+      "dbas": [
+        "ARF Financial"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-139",
+      "legal_name": "SOUTH END CAPITAL LLC",
+      "dbas": [
+        "South End Capital"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-140",
+      "legal_name": "QUICKBUCKS FUNDING LLC",
+      "dbas": [
+        "QuickBucks Funding"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-100000",
+      "typical_term_days": 90,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-141",
+      "legal_name": "24HOURSCAPITAL LLC",
+      "dbas": [
+        "24HoursCapital"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-100000",
+      "typical_term_days": 120,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-142",
+      "legal_name": "ADVANON LLC",
+      "dbas": [
+        "Advanon"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-100000",
+      "typical_term_days": 90,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-143",
+      "legal_name": "STRAIGHTLINE FUNDING LLC",
+      "dbas": [
+        "StraightLine Funding"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-144",
+      "legal_name": "NEWTEK SMALL BUSINESS FINANCE LLC",
+      "dbas": [
+        "Newtek"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-500000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-145",
+      "legal_name": "FAST CAPITAL 360 LLC",
+      "dbas": [
+        "Fast Capital 360"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-146",
+      "legal_name": "AMERICAN FUNDING SOLUTIONS LLC",
+      "dbas": [
+        "American Funding Solutions"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-147",
+      "legal_name": "APEX BUSINESS CAPITAL LLC",
+      "dbas": [
+        "Apex Business Capital"
+      ],
+      "tier": 1,
+      "typical_advance": "5000-250000",
+      "typical_term_days": 180,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-148",
+      "legal_name": "READY CAPITAL CORPORATION",
+      "dbas": [
+        "Ready Capital"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-149",
+      "legal_name": "PIMCO COMMERCIAL MORTGAGE LLC",
+      "dbas": [
+        "PIMCO"
+      ],
+      "tier": 2,
+      "typical_advance": "100000-50000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-150",
+      "legal_name": "LIVE OAK BANKING COMPANY",
+      "dbas": [
+        "Live Oak Bank"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-151",
+      "legal_name": "BANC OF CALIFORNIA NA",
+      "dbas": [
+        "Banc of California"
+      ],
+      "tier": 2,
+      "typical_advance": "100000-10000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-152",
+      "legal_name": "STEARNS BANK NA",
+      "dbas": [
+        "Stearns Bank"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-153",
+      "legal_name": "FIRST HOME BANK",
+      "dbas": [],
+      "tier": 2,
+      "typical_advance": "50000-2500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-154",
+      "legal_name": "MIDDLETOWN VALLEY BANK",
+      "dbas": [],
+      "tier": 2,
+      "typical_advance": "50000-2500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-155",
+      "legal_name": "NEWTEK BANK NA",
+      "dbas": [
+        "Newtek Bank"
+      ],
+      "tier": 2,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-156",
+      "legal_name": "GREATAMERICA FINANCIAL SERVICES CORP",
+      "dbas": [
+        "GreatAmerica Financial"
+      ],
+      "tier": 3,
+      "typical_advance": "25000-2000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-157",
+      "legal_name": "ASHLAND CAPITAL LLC",
+      "dbas": [],
+      "tier": 3,
+      "typical_advance": "25000-1500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-158",
+      "legal_name": "TIME FINANCE COMPANY LLC",
+      "dbas": [],
+      "tier": 3,
+      "typical_advance": "25000-500000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-159",
+      "legal_name": "TETRA FINANCIAL GROUP LLC",
+      "dbas": [],
+      "tier": 3,
+      "typical_advance": "25000-1000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-160",
+      "legal_name": "MADISON CAPITAL LLC",
+      "dbas": [
+        "Madison Capital"
+      ],
+      "tier": 3,
+      "typical_advance": "50000-5000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-161",
+      "legal_name": "BANC OF AMERICA LEASING & CAPITAL LLC",
+      "dbas": [
+        "BofA Leasing"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-50000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-162",
+      "legal_name": "WELLS FARGO EQUIPMENT FINANCE INC",
+      "dbas": [
+        "Wells Fargo EF"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-50000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-163",
+      "legal_name": "PNC EQUIPMENT FINANCE LLC",
+      "dbas": [
+        "PNC EF"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-25000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-164",
+      "legal_name": "U.S. BANCORP EQUIPMENT FINANCE INC",
+      "dbas": [
+        "US Bank EF"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-25000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mca-165",
+      "legal_name": "KEYBANK EQUIPMENT FINANCE",
+      "dbas": [
+        "KeyBank EF"
+      ],
+      "tier": 3,
+      "typical_advance": "100000-25000000",
+      "typical_term_days": 365,
+      "states_active": [
+        "ALL"
+      ],
+      "notes": ""
+    }
+  ]
+}
