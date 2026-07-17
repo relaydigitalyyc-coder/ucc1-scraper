@@ -710,6 +710,7 @@ Do NOT include any text outside the JSON object."""
 
     OPENAI_MODEL = "gpt-4o-mini"
     CLAUDE_MODEL = "claude-sonnet-4-20250514"
+    DEEPSEEK_MODEL = "deepseek-chat"
 
     def __init__(self, api_key: str | None = None, provider: str | None = None) -> None:
         """Initialize LLM enricher.
@@ -717,29 +718,34 @@ Do NOT include any text outside the JSON object."""
         Parameters
         ----------
         api_key : str, optional
-            API key for the LLM provider. Defaults to OPENAI_API_KEY or
-            ANTHROPIC_API_KEY from environment.
+            API key for the LLM provider. Defaults to DEEPSEEK_API_KEY,
+            OPENAI_API_KEY, or ANTHROPIC_API_KEY from environment (in that order).
         provider : str, optional
-            'openai' or 'anthropic'. Auto-detected from the API key format
+            'deepseek', 'openai', or 'anthropic'. Auto-detected from env vars
             if not provided.
         """
         self._api_key = api_key
         self._provider = provider
 
         if not self._api_key:
-            self._api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
+            self._api_key = (os.environ.get("DEEPSEEK_API_KEY")
+                          or os.environ.get("OPENAI_API_KEY")
+                          or os.environ.get("ANTHROPIC_API_KEY"))
             if not self._api_key:
                 self._available = False
                 return
 
         if not self._provider:
-            # Detect from key format
-            if self._api_key.startswith("sk-"):
+            # Detect from env vars: deepseek > openai > anthropic
+            if os.environ.get("DEEPSEEK_API_KEY"):
+                self._provider = "deepseek"
+            elif os.environ.get("OPENAI_API_KEY"):
+                self._provider = "openai"
+            elif self._api_key.startswith("sk-proj-") or self._api_key.startswith("sk-"):
                 self._provider = "openai"
             elif self._api_key.startswith("sk-ant-"):
                 self._provider = "anthropic"
             else:
-                # Default to OpenAI if env var is OPENAI_API_KEY
                 self._provider = "openai" if os.environ.get("OPENAI_API_KEY") else "anthropic"
 
         self._client = httpx.AsyncClient(timeout=30)
@@ -750,10 +756,61 @@ Do NOT include any text outside the JSON object."""
         if not self._available:
             return None
 
-        if self._provider == "openai":
+        if self._provider == "deepseek":
+            return await self._call_deepseek(name, city, state)
+        elif self._provider == "openai":
             return await self._call_openai(name, city, state)
         else:
             return await self._call_anthropic(name, city, state)
+
+    async def _call_deepseek(self, name: str, city: str, state: str) -> EnrichmentResult | None:
+        """Call DeepSeek Chat API (OpenAI-compatible, supports web search)."""
+        prompt = f"Find contact information for this business:\n\nName: {name}\nCity: {city}\nState: {state}"
+
+        headers = {
+            "Authorization": f"Bearer {self._api_key}",
+            "Content-Type": "application/json",
+        }
+        body = {
+            "model": self.DEEPSEEK_MODEL,
+            "messages": [
+                {"role": "system", "content": self.SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.1,
+            "max_tokens": 300,
+        }
+
+        try:
+            resp = await self._client.post(
+                "https://api.deepseek.com/v1/chat/completions",
+                headers=headers,
+                json=body,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+            raw = data["choices"][0]["message"]["content"]
+            cleaned = raw.strip()
+            if cleaned.startswith("```json"):
+                cleaned = cleaned.removeprefix("```json").removesuffix("```").strip()
+            elif cleaned.startswith("```"):
+                cleaned = cleaned.removeprefix("```").removesuffix("```").strip()
+
+            result = json.loads(cleaned)
+            if result.get("phone"):
+                return EnrichmentResult(
+                    phone=result["phone"],
+                    website=result.get("website"),
+                    email=result.get("email"),
+                    industry=result.get("industry"),
+                    years_in_business=result.get("years_in_business"),
+                    source="deepseek",
+                )
+        except Exception as exc:
+            logger.warning("DeepSeek enrichment failed for %s: %s", name, exc)
+
+        return None
 
     async def _call_openai(self, name: str, city: str, state: str) -> EnrichmentResult | None:
         """Call OpenAI Chat Completions API."""
@@ -1057,8 +1114,9 @@ class LeadEnricher:
         except Exception as exc:
             logger.warning("Web search enrichment failed: %s", exc)
 
-        # 4. LLM (last resort)
-        if self._openai_api_key:
+        # 4. LLM (last resort — checks DEEPSEEK_API_KEY, OPENAI_API_KEY, ANTHROPIC_API_KEY)
+        llm_key = os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENAI_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
+        if llm_key:
             try:
                 result = await self._ensure_llm().enrich(name, city, state)
                 if result:
@@ -1108,7 +1166,12 @@ class LeadEnricher:
 
     def _ensure_llm(self) -> LLMEnricher:
         if self._llm is None:
-            self._llm = LLMEnricher(self._openai_api_key)
+            from pipeline.enricher import LLMEnricher
+            import os
+            llm_key = (os.environ.get("DEEPSEEK_API_KEY")
+                      or os.environ.get("OPENAI_API_KEY")
+                      or os.environ.get("ANTHROPIC_API_KEY"))
+            self._llm = LLMEnricher(llm_key)
         return self._llm
 
     async def close(self) -> None:

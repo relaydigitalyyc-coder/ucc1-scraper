@@ -83,3 +83,10 @@ class UCCFiling(BaseModel):
     # Metadata
     scraped_at: datetime = Field(default_factory=datetime.now)
     raw_json: Optional[dict] = Field(default=None, description="Raw data from the source (for debugging)")
+
+# Enable WAL mode for concurrent enrichment writers
+_ENABLE_WAL = """
+PRAGMA journal_mode=WAL;
+PRAGMA busy_timeout=5000;
+PRAGMA synchronous=NORMAL;
+"""

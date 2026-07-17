@@ -23,9 +23,9 @@ async def main():
     db = await aiosqlite.connect(str(db_path))
     db.row_factory = aiosqlite.Row
 
-    # Get all leads, newest first
+    # Get all leads — phone-populated first, then by score
     cursor = await db.execute(
-        "SELECT * FROM leads ORDER BY score_total DESC LIMIT 1000"
+        "SELECT * FROM leads ORDER BY CASE WHEN phone_number IS NOT NULL AND phone_number != '' THEN 0 ELSE 1 END, score_total DESC LIMIT 1000"
     )
     rows = await cursor.fetchall()
     leads = [dict(r) for r in rows]
@@ -45,6 +45,11 @@ async def main():
     )
     mca_count = (await cursor4.fetchone())["cnt"]
 
+    cursor5 = await db.execute(
+        "SELECT COUNT(*) as cnt FROM leads WHERE phone_number IS NOT NULL AND phone_number != ''"
+    )
+    phones = (await cursor5.fetchone())["cnt"]
+
     await db.close()
 
     # Build dashboard payload
@@ -57,6 +62,7 @@ async def main():
             "cold": tiers.get("C", 0),
             "archive": tiers.get("D", 0),
             "mca_match_rate": round(mca_count / total * 100, 1) if total else 0,
+            "with_phones": phones,
         },
         "leads": leads,
     }

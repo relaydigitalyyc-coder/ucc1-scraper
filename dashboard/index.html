@@ -109,6 +109,7 @@
     <div class="stat-card"><div class="label">Total Leads</div><div class="value blue" id="stat-total">-</div></div>
     <div class="stat-card"><div class="label">Hot &bull; Tier A</div><div class="value green" id="stat-hot">-</div></div>
     <div class="stat-card"><div class="label">Warm &bull; Tier B</div><div class="value yellow" id="stat-warm">-</div></div>
+    <div class="stat-card"><div class="label">With Phones 📞</div><div class="value blue" id="stat-phones">-</div></div>
     <div class="stat-card"><div class="label">MCA Match Rate</div><div class="value blue" id="stat-mca">-</div></div>
   </div>
 
@@ -131,6 +132,7 @@
       <table>
         <thead>
           <tr>
+            <th onclick="sort('phone_number')">📞<span class="sort" id="sort-phone"></span></th>
             <th onclick="sort('business_name')">Business Name<span class="sort" id="sort-name"></span></th>
             <th onclick="sort('dba_name')">DBA<span class="sort" id="sort-dba"></span></th>
             <th onclick="sort('business_city')">City/State<span class="sort" id="sort-city"></span></th>

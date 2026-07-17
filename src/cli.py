@@ -541,6 +541,86 @@ def daemon(ctx, states, days, schedule):
         click.echo("Run manually: ucc-scrape scrape --states NY,FL,NJ --days 7")
 
 
+# ── Enrich command ────────────────────────────────────────────────────────
+@cli.command()
+@click.option("--method", default="deepseek", type=click.Choice(["deepseek", "gmaps", "all"]))
+@click.option("--tier", default="B,C", help="Tiers to enrich (comma-separated)")
+@click.option("--limit", default=50, help="Max leads to enrich")
+@click.option("--min-score", default=40, help="Minimum score threshold")
+@click.pass_context
+def enrich(ctx, method, tier, limit, min_score):
+    """Enrich leads with phone numbers."""
+    from pipeline.enricher import LeadEnricher
+    import os
+
+    db_path = ctx.obj["db_path"]
+
+    if method == "deepseek" and not os.environ.get("DEEPSEEK_API_KEY"):
+        click.echo("Set DEEPSEEK_API_KEY environment variable.", err=True)
+        return
+
+    tiers = [t.strip().upper() for t in tier.split(",")]
+
+    click.echo(f"Enriching leads via {method}...")
+    click.echo(f"  Tiers: {', '.join(tiers)}, Limit: {limit}, Min score: {min_score}")
+    asyncio.run(_run_enrich(db_path, method, tiers, limit, min_score))
+
+
+async def _run_enrich(db_path: Path, method: str, tiers: list[str], limit: int, min_score: int):
+    """Run enrichment and import phones back to DB."""
+    from pipeline.enricher import LeadEnricher
+    import aiosqlite
+
+    enricher = LeadEnricher()
+
+    db = await aiosqlite.connect(str(db_path), timeout=30)
+    db.row_factory = aiosqlite.Row
+
+    where = "WHERE (phone_number IS NULL OR phone_number = '') AND tier IN ({}) AND score_total >= ?".format(
+        ",".join("?" for _ in tiers)
+    )
+    params = list(tiers) + [min_score]
+
+    cursor = await db.execute(
+        f"SELECT lead_id, business_name, business_city, business_state FROM leads {where} ORDER BY score_total DESC LIMIT ?",
+        params + [limit],
+    )
+    leads = [dict(r) for r in await cursor.fetchall()]
+    await db.close()
+
+    if not leads:
+        click.echo("No leads need enrichment.")
+        return
+
+    click.echo(f"\nEnriching {len(leads)} leads...")
+
+    found = 0
+    for i, lead in enumerate(leads):
+        biz = lead["business_name"]
+        city = lead.get("business_city", "") or ""
+        state = lead.get("business_state", "") or ""
+
+        result = await enricher.skip_trace(biz, city, state)
+        phone = result.get("phone")
+
+        if phone:
+            found += 1
+            db = await aiosqlite.connect(str(db_path), timeout=30)
+            await db.execute("UPDATE leads SET phone_number = ? WHERE lead_id = ?", (phone, lead["lead_id"]))
+            await db.commit()
+            await db.close()
+
+        click.echo(f"  [{i+1}/{len(leads)}] {biz[:40]} → {phone or 'no phone'}")
+
+    click.echo(f"\nDone: {found}/{len(leads)} phones ({round(found/len(leads)*100)}%)")
+
+    # Refresh dashboard
+    click.echo("Refreshing dashboard data...")
+    import subprocess
+    import sys
+    subprocess.run([sys.executable, "scripts/refresh-dashboard.py"], cwd=Path(__file__).parent.parent)
+
+
 # ── Register ingest command ──────────────────────────────────────────────
 from ingestor import register_ingest_command
 register_ingest_command(cli)
