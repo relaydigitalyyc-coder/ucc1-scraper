@@ -608,13 +608,14 @@ class TestLeadEnricher:
             assert enriched.tier.value == original["tier"]
 
     @pytest.mark.asyncio
-    async def test_enrich_with_no_strategies_available(self, sample_lead):
-        """When no API keys are set, enrichment should not crash."""
+    async def test_enrich_with_no_api_keys(self, sample_lead):
+        """When no API keys are set, enrichment should not crash — web search may still find something."""
         with patch.dict("os.environ", {}, clear=True):
             enricher = LeadEnricher(cache_path=Path(tempfile.mktemp(suffix=".db")))
             enriched = await enricher.enrich(sample_lead)
-            # Should return lead unchanged
-            assert enriched.phone_number is None
+            # Should return a lead (web search may or may not find a phone)
+            assert enriched is not None
+            assert enriched.business_name == sample_lead.business_name
 
     @pytest.mark.asyncio
     async def test_enrich_batch(self, sample_lead):
