@@ -20,6 +20,7 @@ import click
 from pipeline.classifier import MCAClassifier
 from pipeline.dedupe import Deduplicator
 from pipeline.normalizer import FilingNormalizer
+from pipeline.re_finder import RealEstateLeadFinder, format_re_lead_csv_row
 from pipeline.scorer import LeadScorer
 from scrapers.registry import get_scraper, list_available_states
 from storage import Storage
@@ -228,6 +229,169 @@ async def _export_leads(storage: Storage, fmt: str, output: str, tier: str, stat
         click.echo(f"Unknown format: {fmt}", err=True)
 
 
+# ── Real Estate Lead Commands ────────────────────────────────────────────
+
+
+@cli.command()
+@click.option("--tier", default="A", help="Lead tier filter (A, B, C, D, or 'all')")
+@click.option("--limit", default=50, help="Number of RE leads to show")
+@click.option("--category", default=None, help="Filter by lender category (hard_money, private_reit, construction, etc.)")
+@click.option("--lenders", is_flag=True, default=False, help="List the known RE lender database and exit")
+@click.option("--export", "export_path", default=None, help="Export RE leads to CSV file path")
+@click.pass_context
+def re_leads(ctx, tier, limit, category, lenders, export_path):
+    """Show real estate UCC leads — hard money, bridge, fix-and-flip, construction.
+
+    Scans all filings in the database for real-estate-secured UCC-1 filings.
+    Scores each lead 0-100 and classifies by tier (A=hot through D=archive).
+
+    Examples:
+        ucc-scrape re-leads                       # Tier A leads (hot)
+        ucc-scrape re-leads --tier all            # All tiers
+        ucc-scrape re-leads --category hard_money # Hard money lenders only
+        ucc-scrape re-leads --lenders             # Show lender database
+        ucc-scrape re-leads --export re_leads.csv # Export all to CSV
+    """
+    db_path = ctx.obj["db_path"]
+
+    if lenders:
+        from pipeline.re_finder import HARD_MONEY_LENDERS, TOTAL_RE_LENDERS, CATEGORY_LABELS
+        click.echo(f"\nReal Estate Lender Database ({TOTAL_RE_LENDERS} lenders)")
+        click.echo("=" * 70)
+
+        for cat in ["hard_money", "fix_and_flip", "construction", "private_reit", "bridge_lender", "traditional_bank"]:
+            cat_lenders = {k: v for k, v in HARD_MONEY_LENDERS.items() if v["category"] == cat}
+            if cat_lenders:
+                click.echo(f"\n  {CATEGORY_LABELS[cat]} ({len(cat_lenders)}):")
+                for name in sorted(cat_lenders.keys()):
+                    tier_label = {1: "HM", 2: "REIT", 3: "BK"}.get(cat_lenders[name]["tier"], "?")
+                    click.echo(f"    [{tier_label}] {name}")
+        return
+
+    storage = Storage(db_path)
+    asyncio.run(_show_re_leads(storage, tier, limit, category, export_path))
+
+
+async def _show_re_leads(storage: Storage, tier: str, limit: int, category: str | None, export_path: str | None):
+    """Display real estate leads from the database or generate fresh."""
+    await storage.init()
+
+    finder = RealEstateLeadFinder()
+
+    # Try loading from DB first, then fall back to fresh scan
+    stored_leads = []
+    if tier == "all":
+        for t in ["A", "B", "C", "D"]:
+            stored_leads.extend(await storage.get_re_leads_by_tier(t, limit))
+    else:
+        stored_leads = await storage.get_re_leads_by_tier(tier.upper(), limit)
+
+    if stored_leads:
+        leads = stored_leads
+    else:
+        # No stored leads — do a fresh scan of all filings in DB
+        from ingestor import UCCIngestor
+        ingestor = UCCIngestor(storage.db_path)
+
+        # Load all filings from DB
+        async with aiosqlite.connect(str(storage.db_path)) as db:
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                "SELECT * FROM filings ORDER BY filing_date DESC LIMIT 5000"
+            )
+            rows = await cursor.fetchall()
+
+        raw_filings = [dict(row) for row in rows]
+        leads = finder.find_re_leads(raw_filings)
+
+        if leads:
+            await storage.save_re_leads(leads)
+
+    # Apply category filter
+    if category:
+        leads = [l for l in leads if l.get("lender_category") == category]
+
+    if not leads:
+        click.echo("No RE leads found.")
+        return
+
+    # Export to CSV
+    if export_path:
+        fieldnames = list(format_re_lead_csv_row(leads[0]).keys())
+        with open(export_path, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for lead in leads:
+                writer.writerow(format_re_lead_csv_row(lead))
+        click.echo(f"Exported {len(leads)} RE leads to {export_path}")
+        return
+
+    # Display
+    click.echo(f"\n── Real Estate Leads (Tier {tier}) ──")
+    click.echo(f"{'=' * 70}")
+
+    for lead in leads[:limit]:
+        score = lead["score"]
+        biz = lead["business_name"][:40]
+        lender = lead.get("lender_matched", lead.get("lender_name", ""))[:30]
+        category_display = lead.get("lender_display", lead.get("lender_category", "RE"))
+        city = lead.get("location_city") or ""
+        state = lead.get("location_state") or lead.get("filing_state", "")
+        location = f"{city}, {state}" if city else state
+        lead_index = lead.get("lead_index", "RE-?")
+
+        click.echo(
+            f"  {lead_index} [{score:3d}] {biz:40s} | "
+            f"{lender:30s} | {location:20s} | {category_display}"
+        )
+
+    click.echo(f"\n  Total: {len(leads)} leads shown")
+
+
+@cli.command()
+@click.option("--limit", default=20000, help="Max filings to scan")
+@click.pass_context
+def refresh_re_leads(ctx, limit):
+    """Re-scan all filings in the DB and regenerate RE lead scores."""
+    db_path = ctx.obj["db_path"]
+    asyncio.run(_refresh_re_leads(db_path, limit))
+
+
+async def _refresh_re_leads(db_path: Path, limit: int):
+    """Re-scan all filings, generate fresh RE leads, and store them."""
+    import aiosqlite
+
+    storage = Storage(db_path)
+    await storage.init()
+
+    finder = RealEstateLeadFinder()
+
+    # Load all filings from DB
+    async with aiosqlite.connect(str(db_path)) as db:
+        db.row_factory = aiosqlite.Row
+        cursor = await db.execute(
+            "SELECT * FROM filings ORDER BY filing_date DESC LIMIT ?",
+            (limit,),
+        )
+        rows = await cursor.fetchall()
+
+    raw_filings = [dict(row) for row in rows]
+    click.echo(f"Scanning {len(raw_filings)} filings for RE leads...")
+
+    leads = finder.find_re_leads(raw_filings)
+    click.echo(f"Found {len(leads)} RE leads.")
+
+    # Save to DB
+    await storage.save_re_leads(leads)
+
+    # Show tier breakdown
+    tier_counts = await storage.get_re_tier_counts()
+    click.echo(f"\n  RE Tier A (Hot):     {tier_counts.get('A', 0)}")
+    click.echo(f"  RE Tier B (Warm):    {tier_counts.get('B', 0)}")
+    click.echo(f"  RE Tier C (Cold):    {tier_counts.get('C', 0)}")
+    click.echo(f"  RE Tier D (Archive): {tier_counts.get('D', 0)}")
+
+
 @cli.command()
 @click.option("--states", default="all", help="Comma-separated state codes or 'all'")
 @click.pass_context
@@ -282,14 +446,22 @@ async def _show_stats(storage: Storage):
 
     lead_count = await storage.get_lead_count()
     tier_counts = await storage.get_tier_counts()
+    re_lead_count = await storage.get_re_lead_count()
+    re_tier_counts = await storage.get_re_tier_counts()
 
     click.echo(f"\nUCC-1 Scraper Statistics")
     click.echo(f"{'='*40}")
-    click.echo(f"  Total leads: {lead_count}")
-    click.echo(f"  Tier A (Hot):     {tier_counts.get('A', 0)}")
-    click.echo(f"  Tier B (Warm):    {tier_counts.get('B', 0)}")
-    click.echo(f"  Tier C (Cold):    {tier_counts.get('C', 0)}")
-    click.echo(f"  Tier D (Archive): {tier_counts.get('D', 0)}")
+    click.echo(f"  Total leads:       {lead_count}")
+    click.echo(f"  Tier A (Hot):      {tier_counts.get('A', 0)}")
+    click.echo(f"  Tier B (Warm):     {tier_counts.get('B', 0)}")
+    click.echo(f"  Tier C (Cold):     {tier_counts.get('C', 0)}")
+    click.echo(f"  Tier D (Archive):  {tier_counts.get('D', 0)}")
+    click.echo(f"  ─────────────────────────")
+    click.echo(f"  RE leads:          {re_lead_count}")
+    click.echo(f"  RE Tier A (Hot):   {re_tier_counts.get('A', 0)}")
+    click.echo(f"  RE Tier B (Warm):  {re_tier_counts.get('B', 0)}")
+    click.echo(f"  RE Tier C (Cold):  {re_tier_counts.get('C', 0)}")
+    click.echo(f"  RE Tier D (Arch):  {re_tier_counts.get('D', 0)}")
     click.echo(f"\n  Available states: {', '.join(list_available_states())}")
 
 

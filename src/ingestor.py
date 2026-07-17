@@ -26,6 +26,7 @@ from models.filing import UCCFiling, FilingStatus, DebtorInfo, SecuredPartyInfo
 from models.lead import MCALead
 from pipeline.classifier import MCAClassifier
 from pipeline.dedupe import Deduplicator
+from pipeline.enricher import LeadEnricher
 from pipeline.normalizer import FilingNormalizer
 from pipeline.scorer import LeadScorer
 from storage import Storage
@@ -144,12 +145,14 @@ class UCCIngestor:
 
     # ── Main processing pipeline ─────────────────────────────────────
 
-    def __init__(self, db_path: Path | None = None):
+    def __init__(self, db_path: Path | None = None, enrich: bool = False):
         self.db_path = db_path or Path("data/ucc_scraper.db")
+        self.enrich = enrich
         self.normalizer = FilingNormalizer()
         self.classifier = MCAClassifier()
         self.scorer = LeadScorer()
         self.dedupe = Deduplicator()
+        self.enricher: LeadEnricher | None = None
 
     async def process(
         self,
@@ -207,6 +210,11 @@ class UCCIngestor:
                 # Generate lead
                 related = self.dedupe.get_related(filing)
                 lead = self.scorer.score(filing, related)
+
+                # Enrich with contact info if --enrich flag is set
+                if self.enrich:
+                    lead = await self._enrich_lead(lead)
+
                 await storage.save_lead(lead)
                 stats["leads"] += 1
 
@@ -318,6 +326,26 @@ class UCCIngestor:
 
             return []
 
+    async def _ensure_enricher(self) -> LeadEnricher:
+        """Lazy-init the enricher (with API keys from env)."""
+        if self.enricher is None:
+            self.enricher = LeadEnricher()
+            await asyncio.to_thread(self.enricher._cache.open)
+        return self.enricher
+
+    async def _enrich_lead(self, lead: MCALead) -> MCALead:
+        """Enrich a single lead with phone/website/industry data."""
+        enricher = await self._ensure_enricher()
+        try:
+            enriched = await enricher.enrich(lead)
+            if enriched.phone_number:
+                click.echo(f"    Phone: {enriched.phone_number} ({enriched.business_name})")
+            return enriched
+        except Exception as e:
+            click.echo(f"  ⚠ Enrichment failed for {lead.business_name}: {e}", err=True)
+            import traceback; traceback.print_exc()
+            return lead
+
     # ── Report ───────────────────────────────────────────────────────
 
     @staticmethod
@@ -350,9 +378,10 @@ async def _ingest_command(
     apify_input: Optional[str] = None,
     apify_token: Optional[str] = None,
     apify_dataset: Optional[str] = None,
+    enrich: bool = False,
 ):
     """Run the ingestion pipeline."""
-    ingestor = UCCIngestor(db_path)
+    ingestor = UCCIngestor(db_path, enrich=enrich)
 
     if apify_dataset:
         click.echo(f"Loading Apify dataset: {apify_dataset}")
@@ -412,8 +441,9 @@ def register_ingest_command(cli):
     @click.option("--apify-input", default=None, help="Apify actor input JSON")
     @click.option("--apify-token", default=None, help="Apify API token")
     @click.option("--apify-dataset", default=None, help="Apify dataset ID to load directly")
+    @click.option("--enrich/--no-enrich", default=False, help="Skip-trace phone numbers and website via Google Places / LLM")
     @click.pass_context
-    def ingest(ctx, input_file, input_format, column_map, apify_actor, apify_input, apify_token, apify_dataset):
+    def ingest(ctx, input_file, input_format, column_map, apify_actor, apify_input, apify_token, apify_dataset, enrich):
         """Ingest UCC filings from file or API, run through classification pipeline."""
         db_path = ctx.obj["db_path"]
         asyncio.run(_ingest_command(
@@ -425,6 +455,7 @@ def register_ingest_command(cli):
             apify_input=apify_input,
             apify_token=apify_token,
             apify_dataset=apify_dataset,
+            enrich=enrich,
         ))
 
     return cli

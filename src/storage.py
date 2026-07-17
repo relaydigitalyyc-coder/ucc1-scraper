@@ -71,6 +71,31 @@ class Storage:
                 CREATE INDEX IF NOT EXISTS idx_leads_score ON leads(score_total DESC);
                 CREATE INDEX IF NOT EXISTS idx_leads_state ON leads(filing_state);
                 CREATE INDEX IF NOT EXISTS idx_leads_date ON leads(filing_date);
+
+                CREATE TABLE IF NOT EXISTS re_leads (
+                    lead_id TEXT PRIMARY KEY,
+                    lead_index TEXT,
+                    business_name TEXT NOT NULL,
+                    lender_name TEXT NOT NULL,
+                    lender_matched TEXT,
+                    lender_category TEXT,
+                    lender_tier INTEGER,
+                    score_total INTEGER NOT NULL,
+                    tier TEXT NOT NULL,
+                    location_city TEXT,
+                    location_state TEXT,
+                    filing_number TEXT NOT NULL,
+                    filing_state TEXT NOT NULL,
+                    filing_date TEXT NOT NULL,
+                    collateral_excerpt TEXT,
+                    score_json TEXT,
+                    generated_at TEXT NOT NULL
+                );
+
+                CREATE INDEX IF NOT EXISTS idx_re_leads_tier ON re_leads(tier);
+                CREATE INDEX IF NOT EXISTS idx_re_leads_score ON re_leads(score_total DESC);
+                CREATE INDEX IF NOT EXISTS idx_re_leads_state ON re_leads(filing_state);
+                CREATE INDEX IF NOT EXISTS idx_re_leads_category ON re_leads(lender_category);
             """)
             await db.commit()
 
@@ -161,6 +186,83 @@ class Storage:
         """Save multiple leads."""
         for lead in leads:
             await self.save_lead(lead)
+
+    # ── Real Estate Lead Storage ────────────────────────────────────
+
+    async def save_re_lead(self, lead: dict):
+        """Insert or update a real estate lead."""
+        import json
+        async with aiosqlite.connect(str(self.db_path)) as db:
+            await db.execute(
+                """INSERT OR REPLACE INTO re_leads
+                   (lead_id, lead_index, business_name, lender_name, lender_matched,
+                    lender_category, lender_tier, score_total, tier,
+                    location_city, location_state,
+                    filing_number, filing_state, filing_date,
+                    collateral_excerpt, score_json, generated_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    lead.get("lead_id", ""),
+                    lead.get("lead_index", ""),
+                    lead.get("business_name", ""),
+                    lead.get("lender_name", ""),
+                    lead.get("lender_matched", ""),
+                    lead.get("lender_category", ""),
+                    lead.get("lender_tier", 4),
+                    lead.get("score", 0),
+                    lead.get("tier", "D"),
+                    lead.get("location_city"),
+                    lead.get("location_state"),
+                    lead.get("filing_number", ""),
+                    lead.get("filing_state", ""),
+                    lead.get("filing_date", ""),
+                    lead.get("collateral_excerpt", "")[:500],
+                    json.dumps(lead.get("score_breakdown", {})),
+                    datetime.now().isoformat(),
+                ),
+            )
+            await db.commit()
+
+    async def save_re_leads(self, leads: list[dict]):
+        """Save multiple RE leads."""
+        for lead in leads:
+            await self.save_re_lead(lead)
+
+    async def get_re_lead_count(self) -> int:
+        """Get total RE lead count."""
+        async with aiosqlite.connect(str(self.db_path)) as db:
+            cursor = await db.execute("SELECT COUNT(*) FROM re_leads")
+            row = await cursor.fetchone()
+            return row[0] if row else 0
+
+    async def get_re_tier_counts(self) -> dict[str, int]:
+        """Get RE lead counts by tier."""
+        async with aiosqlite.connect(str(self.db_path)) as db:
+            cursor = await db.execute("SELECT tier, COUNT(*) FROM re_leads GROUP BY tier")
+            rows = await cursor.fetchall()
+            return {row[0]: row[1] for row in rows}
+
+    async def get_re_leads_by_tier(self, tier: str, limit: int = 100) -> list[dict]:
+        """Get RE leads for a specific tier."""
+        async with aiosqlite.connect(str(self.db_path)) as db:
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                "SELECT * FROM re_leads WHERE tier = ? ORDER BY score_total DESC LIMIT ?",
+                (tier, limit),
+            )
+            rows = await cursor.fetchall()
+            return [dict(row) for row in rows]
+
+    async def get_re_leads_by_category(self, category: str, limit: int = 100) -> list[dict]:
+        """Get RE leads filtered by lender category."""
+        async with aiosqlite.connect(str(self.db_path)) as db:
+            db.row_factory = aiosqlite.Row
+            cursor = await db.execute(
+                "SELECT * FROM re_leads WHERE lender_category = ? ORDER BY score_total DESC LIMIT ?",
+                (category, limit),
+            )
+            rows = await cursor.fetchall()
+            return [dict(row) for row in rows]
 
     async def get_lead_count(self) -> int:
         """Get total lead count."""
