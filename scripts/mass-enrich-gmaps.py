@@ -23,7 +23,7 @@ from pipeline.gmaps_enricher import GoogleMapsEnricher
 
 
 async def mass_enrich(
-    db_path: Path = Path("data/ucc_scraper.db"),
+    db_path: Path | None = None,
     tier: str | None = None,
     limit: int = 200,
     rotate_every: int = 25,
