@@ -6,6 +6,7 @@ from pipeline.scorer import LeadScorer
 from pipeline.dedupe import Deduplicator
 from pipeline.enricher import LeadEnricher
 from pipeline.re_finder import RealEstateLeadFinder, find_re_leads
+from pipeline.florida_ocr import FloridaOCR, enrich_florida_filings
 
 __all__ = [
     "FilingNormalizer",
@@ -15,4 +16,6 @@ __all__ = [
     "LeadEnricher",
     "RealEstateLeadFinder",
     "find_re_leads",
+    "FloridaOCR",
+    "enrich_florida_filings",
 ]
