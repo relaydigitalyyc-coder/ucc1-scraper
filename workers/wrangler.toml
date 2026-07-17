@@ -1,0 +1,15 @@
+name = "ucc1-enricher"
+compatibility_date = "2026-07-17"
+main = "enrich-worker.js"
+
+# Trigger every 15 minutes
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Environment variables — set via `npx wrangler secret put`
+[vars]
+WORKER_SECRET = "dev-secret"
+
+# Uncomment and set:
+# npx wrangler secret put GOOGLE_PLACES_API_KEY
+# npx wrangler secret put OPENCORPORATES_API_KEY
