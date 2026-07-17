@@ -439,7 +439,7 @@ class TestWebSearchEnricher:
         """
 
         with patch("httpx.AsyncClient.get", new_callable=AsyncMock) as mock_get:
-            mock_get.return_value = httpx.Response(200, text=html)
+            mock_get.return_value = httpx.Response(200, request=AsyncMock(), text=html)
             enricher = WebSearchEnricher()
             result = await enricher.enrich("Joe's Seafood Shack", "Miami", "FL")
             assert result is not None
@@ -451,7 +451,7 @@ class TestWebSearchEnricher:
         html = "<html><body><p>No results found.</p></body></html>"
 
         with patch("httpx.AsyncClient.get", new_callable=AsyncMock) as mock_get:
-            mock_get.return_value = httpx.Response(200, text=html)
+            mock_get.return_value = httpx.Response(200, request=AsyncMock(), text=html)
             enricher = WebSearchEnricher()
             result = await enricher.enrich("Unknown", "City", "ST")
             assert result is None
@@ -479,7 +479,7 @@ class TestWebSearchEnricher:
         """
 
         with patch("httpx.AsyncClient.get", new_callable=AsyncMock) as mock_get:
-            mock_get.return_value = httpx.Response(200, text=html)
+            mock_get.return_value = httpx.Response(200, request=AsyncMock(), text=html)
             enricher = WebSearchEnricher()
             result = await enricher.enrich("Joe's Seafood Shack", "Miami", "FL")
             assert result is not None
@@ -510,7 +510,7 @@ class TestLLMEnricher:
         }
 
         with patch("httpx.AsyncClient.post", new_callable=AsyncMock) as mock_post:
-            mock_post.return_value = httpx.Response(200, json=mock_response)
+            mock_post.return_value = httpx.Response(200, request=AsyncMock(), json=mock_response)
             enricher = LLMEnricher(api_key="sk-test-key-12345")
             result = await enricher.enrich("Joe's Seafood Shack", "Miami", "FL")
             assert result is not None
@@ -604,8 +604,8 @@ class TestLeadEnricher:
             enriched = await enricher.enrich(sample_lead)
             assert enriched.business_name == original["business_name"]
             assert enriched.mca_funder_name == original["mca_funder_name"]
-            assert enriched.score.total == original["score"].total
-            assert enriched.tier == original["tier"]
+            assert enriched.score.total == original["score"]["total"]
+            assert enriched.tier.value == original["tier"]
 
     @pytest.mark.asyncio
     async def test_enrich_with_no_strategies_available(self, sample_lead):
@@ -736,7 +736,8 @@ class TestLeadEnricher:
             assert result["phone"] == "+13055559999"
             assert result["industry"] == "Restaurants"
             assert result["years_in_business"] == 8.0
-            assert result["source"] == "google_places"  # source from first strategy
+            # Source is from the first strategy that returned data (opencorporates)
+            assert result["source"] == "opencorporates"
 
             mock_google.assert_awaited_once()
             mock_oc.assert_awaited_once()

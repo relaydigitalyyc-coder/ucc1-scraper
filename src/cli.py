@@ -331,7 +331,7 @@ async def _show_re_leads(storage: Storage, tier: str, limit: int, category: str 
     click.echo(f"{'=' * 70}")
 
     for lead in leads[:limit]:
-        score = lead["score"]
+        score = lead["score_total"]
         biz = lead["business_name"][:40]
         lender = lead.get("lender_matched", lead.get("lender_name", ""))[:30]
         category_display = lead.get("lender_display", lead.get("lender_category", "RE"))
